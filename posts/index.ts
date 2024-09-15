@@ -10,7 +10,7 @@ interface Post {
 }
 
 const posts: Record<PropertyKey, Post> = {};
-//dfgdf
+
 app.get('/posts', (req, res) => {
   res.send(posts);
 });
