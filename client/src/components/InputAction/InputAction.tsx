@@ -4,6 +4,7 @@ import axios from 'axios';
 interface InputActionType {
   inputLabel: string;
   buttonLabel: string;
+  buttonVariant?: 'link' | 'text' | 'primary' | 'default' | 'dashed';
   value: string;
   changeValue: (value: string) => void;
 }
@@ -15,6 +16,7 @@ interface FieldType {
 const InputAction: React.FC<InputActionType> = ({
   inputLabel,
   buttonLabel,
+  buttonVariant,
   value,
   changeValue,
 }) => {
@@ -41,10 +43,9 @@ const InputAction: React.FC<InputActionType> = ({
           <Input
             value={value}
             onChange={handleInputChange}
-            style={{ maxWidth: 280 }}
           />
         </Form.Item>
-        <Button type="primary" htmlType="submit">
+        <Button type={buttonVariant} htmlType="submit">
           {buttonLabel}
         </Button>
       </Flex>

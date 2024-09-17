@@ -11,6 +11,7 @@ const PostCreate = () => {
         <InputAction
           inputLabel="Title"
           buttonLabel="Submit"
+          buttonVariant='primary'
           value={title}
           changeValue={setTitle}
         />
