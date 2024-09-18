@@ -1,58 +1,32 @@
-import { Card, Divider, List } from 'antd';
+import { Card, Divider } from 'antd';
 import * as React from 'react';
 import InputAction from '../InputAction';
 
-const posts = [
-  {
-    title: 'Title 1',
-  },
-  {
-    title: 'Title 2',
-  },
-  {
-    title: 'Title 3',
-  },
-  {
-    title: 'Title 4',
-  },
-];
-
-const comments = [
-  'Racing car sprays burning fuel into crowd.',
-  'Japanese princess to wed commoner.',
-  'Australian walks 100km after outback crash.',
-  'Man charged over missing wedding girl.',
-  'Los Angeles battles huge wildfires.',
-];
-
-interface PostCardType {
+interface Post {
   title: string;
+  comments: string[]
 }
 
-const PostCard: React.FC<PostCardType> = () => {
+interface PostCardType {
+  post: Post
+}
+
+const PostCard: React.FC<PostCardType> = ({post}) => {
   return (
-    <List
-      grid={{ gutter: 16, column: 2 }}
-      dataSource={posts}
-      renderItem={(item) => (
-        <List.Item>
-          <Card title={item.title}>
-            <ul>
-              {comments.map((comment) => (
-                <li key={Math.random()}>{comment}</li>
-              ))}
-            </ul>
-            <Divider />
-            <InputAction
-              inputLabel="Comment"
-              buttonLabel="Submit"
-              value=""
-              changeValue={() => {}}
-            />
-          </Card>
-        </List.Item>
-      )}
-    />
+    <Card title={post.title}>
+      <ul>
+        {post.comments.map((comment) => (
+          <li key={Math.random()}>{comment}</li>
+        ))}
+      </ul>
+      <Divider />
+      <InputAction
+        inputLabel="Comment"
+        buttonLabel="Submit"
+        value=""
+        changeValue={() => {}}
+      />
+    </Card>
   );
 };
 
