@@ -2,20 +2,21 @@ import { Card, Divider } from 'antd';
 import * as React from 'react';
 import InputAction from '../InputAction';
 
-interface Post {
+export interface Post {
+  id?: string
   title: string;
-  comments: string[]
 }
 
 interface PostCardType {
   post: Post
+  comments: string[]
 }
 
-const PostCard: React.FC<PostCardType> = ({post}) => {
+const PostCard: React.FC<PostCardType> = ({post, comments}) => {
   return (
     <Card title={post.title}>
       <ul>
-        {post.comments.map((comment) => (
+        {comments.map((comment) => (
           <li key={Math.random()}>{comment}</li>
         ))}
       </ul>

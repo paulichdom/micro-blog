@@ -1,10 +1,10 @@
 import express from 'express';
 import { randomBytes } from 'crypto';
-import cors from 'cors'
+import cors from 'cors';
 
 const app = express();
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 
 interface Post {
   id: string;
@@ -14,7 +14,7 @@ interface Post {
 const posts: Record<PropertyKey, Post> = {};
 
 app.get('/posts', (req, res) => {
-  res.send(posts);
+  res.send(Object.values(posts));
 });
 
 app.post('/posts', (req, res) => {

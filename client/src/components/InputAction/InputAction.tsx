@@ -1,5 +1,8 @@
 import { Flex, Typography, Input, Button, Form, FormProps } from 'antd';
 import axios from 'axios';
+import { useSWRConfig } from 'swr';
+
+const POSTS_URL = 'http://localhost:4000/posts';
 
 interface InputActionType {
   inputLabel: string;
@@ -20,6 +23,7 @@ const InputAction: React.FC<InputActionType> = ({
   value,
   changeValue,
 }) => {
+  const { mutate } = useSWRConfig();
   const [form] = Form.useForm();
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     changeValue(event.target.value);
@@ -30,7 +34,9 @@ const InputAction: React.FC<InputActionType> = ({
       title: values.title,
     });
 
+    
     form.resetFields();
+    mutate(POSTS_URL);
   };
 
   return (
@@ -40,10 +46,7 @@ const InputAction: React.FC<InputActionType> = ({
           {inputLabel}
         </Typography.Title>
         <Form.Item<FieldType> name="title" rules={[{ required: true }]}>
-          <Input
-            value={value}
-            onChange={handleInputChange}
-          />
+          <Input value={value} onChange={handleInputChange} />
         </Form.Item>
         <Button type={buttonVariant} htmlType="submit">
           {buttonLabel}

@@ -1,5 +1,5 @@
 import { List } from 'antd';
-import PostCard from '../PostCard';
+import PostCard, { Post } from '../PostCard';
 
 const comments = [
   'Racing car sprays burning fuel into crowd.',
@@ -9,37 +9,24 @@ const comments = [
   'Los Angeles battles huge wildfires.',
 ];
 
-const posts = [
-  {
-    title: 'Title 1',
-    comments,
-  },
-  {
-    title: 'Title 2',
-    comments,
-  },
-  {
-    title: 'Title 3',
-    comments,
-  },
-  {
-    title: 'Title 4',
-    comments,
-  },
-];
+interface PostListProps {
+  isLoading: boolean;
+  posts: Post[] | undefined;
+}
 
-function PostList() {
+const PostList: React.FC<PostListProps> = ({ isLoading, posts }) => {
   return (
     <List
+      loading={isLoading}
       grid={{ gutter: 16, column: 2 }}
       dataSource={posts}
       renderItem={(post) => (
         <List.Item>
-          <PostCard post={post} />
+          <PostCard post={post} comments={comments} />
         </List.Item>
       )}
     />
   );
-}
+};
 
 export default PostList;

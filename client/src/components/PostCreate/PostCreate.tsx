@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { Typography, Flex } from 'antd';
 import InputAction from '../InputAction';
 
-const PostCreate = () => {
-  
+const PostCreate: React.FC = () => {
   const [title, setTitle] = useState('');
   return (
     <Flex vertical>
