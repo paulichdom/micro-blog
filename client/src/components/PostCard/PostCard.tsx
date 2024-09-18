@@ -37,11 +37,11 @@ const PostCard: React.FC<PostCardType> = () => {
       renderItem={(item) => (
         <List.Item>
           <Card title={item.title}>
-            <List
-              size="small"
-              dataSource={comments}
-              renderItem={(item) => <List.Item>{item}</List.Item>}
-            />
+            <ul>
+              {comments.map((comment) => (
+                <li key={Math.random()}>{comment}</li>
+              ))}
+            </ul>
             <Divider />
             <InputAction
               inputLabel="Comment"
