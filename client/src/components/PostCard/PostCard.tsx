@@ -1,25 +1,32 @@
 import * as React from 'react';
 import { Card, Divider } from 'antd';
 import CommentCreate from '../CommentCreate';
+import CommentList from '../CommentList';
+import useSWR from 'swr';
+import axios from 'axios';
+import { getCommentsURL } from '../../utils';
 
 export interface Post {
   id?: string;
   title: string;
 }
 
-interface PostCardType {
-  post: Post;
-  comments: string[];
+export interface Comment {
+  id: string;
+  content: string;
 }
 
-const PostCard: React.FC<PostCardType> = ({ post, comments }) => {
+const PostCard: React.FC<{ post: Post }> = ({ post }) => {
+  const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+  const { isLoading, data } = useSWR<Comment[]>(
+    getCommentsURL(post.id as string), fetcher
+  );
+  const hasComments = !!(data && data.length > 0);
+  
+  console.log({ isLoading, data });
   return (
     <Card title={post.title}>
-      <ul>
-        {comments.map((comment) => (
-          <li key={Math.random()}>{comment}</li>
-        ))}
-      </ul>
+      {!isLoading && hasComments && <CommentList comments={data} />}
       <Divider />
       <CommentCreate postId={post.id as string} />
     </Card>

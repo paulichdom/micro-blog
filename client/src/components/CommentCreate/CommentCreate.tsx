@@ -1,6 +1,8 @@
 import { Button, Flex, Form, FormProps, Input, Typography } from 'antd';
 import axios from 'axios';
 import * as React from 'react';
+import { getCommentsURL } from '../../utils';
+import { useSWRConfig } from 'swr';
 
 interface FieldType {
   content?: string;
@@ -10,10 +12,8 @@ interface CommentCreateProps {
   postId: string;
 }
 
-const getCommentsURL = (postId: string) =>
-  `http://localhost:4001/posts/${postId}/comments`;
-
 const CommentCreate: React.FC<CommentCreateProps> = ({ postId }) => {
+  const { mutate } = useSWRConfig();
   const [content, setContent] = React.useState('');
   const [form] = Form.useForm();
 
@@ -27,6 +27,7 @@ const CommentCreate: React.FC<CommentCreateProps> = ({ postId }) => {
     });
 
     form.resetFields();
+    mutate(getCommentsURL(postId));
   };
 
   return (
