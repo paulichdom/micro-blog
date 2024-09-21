@@ -18,15 +18,15 @@ export interface Comment {
 
 const PostCard: React.FC<{ post: Post }> = ({ post }) => {
   const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+
   const { isLoading, data } = useSWR<Comment[]>(
-    getCommentsURL(post.id as string), fetcher
+    getCommentsURL(post.id as string),
+    fetcher
   );
-  const hasComments = !!(data && data.length > 0);
-  
-  console.log({ isLoading, data });
+
   return (
-    <Card title={post.title}>
-      {!isLoading && hasComments && <CommentList comments={data} />}
+    <Card loading={isLoading} title={post.title}>
+      {!isLoading && <CommentList comments={data || []} />}
       <Divider />
       <CommentCreate postId={post.id as string} />
     </Card>
