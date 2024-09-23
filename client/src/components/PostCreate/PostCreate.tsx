@@ -3,7 +3,7 @@ import { Typography, Flex, Form, FormProps, Input, Button } from 'antd';
 import { useSWRConfig } from 'swr';
 import axios from 'axios';
 
-export const POSTS_URL = 'http://localhost:4000/posts';
+export const POSTS_URL = 'http://localhost:4002/posts';
 
 interface FieldType {
   title?: string;

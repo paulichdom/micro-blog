@@ -7,11 +7,12 @@ import useSWR from 'swr';
 import axios from 'axios';
 import { Post } from './components/PostCard';
 
-const POSTS_URL = 'http://localhost:4000/posts';
+const POSTS_URL = 'http://localhost:4002/posts';
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 const App: React.FC = () => {
   const { isLoading, data: posts } = useSWR<Post[]>(POSTS_URL, fetcher);
+  console.log({posts})
   return (
     <PageLayout>
       <PostCreate />

@@ -3,6 +3,7 @@ import axios from 'axios';
 import * as React from 'react';
 import { getCommentsURL } from '../../utils';
 import { useSWRConfig } from 'swr';
+import { POSTS_URL } from '../PostCreate';
 
 interface FieldType {
   content?: string;
@@ -27,7 +28,7 @@ const CommentCreate: React.FC<CommentCreateProps> = ({ postId }) => {
     });
 
     form.resetFields();
-    mutate(getCommentsURL(postId));
+    mutate(POSTS_URL);
   };
 
   return (

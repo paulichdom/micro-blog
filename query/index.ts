@@ -9,7 +9,7 @@ app.use(cors());
 const posts: Record<PropertyKey, Post> = {};
 
 app.get('/posts', (req, res) => {
-  res.send(posts);
+  res.send(Object.values(posts));
 });
 
 app.post('/events', (req, res) => {
