@@ -10,7 +10,7 @@ app.use(cors());
 interface Comment {
   id: string;
   content: string;
-  status: 'pending' | 'approved'
+  status: 'pending' | 'approved' | 'rejected'
 }
 
 const commentsByPostId: Record<PropertyKey, Comment[]> = {};
