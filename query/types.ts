@@ -7,4 +7,5 @@ export interface Post {
 export interface Comment {
   id: string;
   content: string;
+  status: 'pending' | 'approved'
 }

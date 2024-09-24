@@ -10,6 +10,7 @@ app.use(cors());
 interface Comment {
   id: string;
   content: string;
+  status: 'pending' | 'approved'
 }
 
 const commentsByPostId: Record<PropertyKey, Comment[]> = {};
@@ -24,7 +25,7 @@ app.post('/posts/:id/comments', async (req, res) => {
 
   const comments = commentsByPostId[req.params.id] || [];
 
-  comments.push({ id: commentId, content });
+  comments.push({ id: commentId, content, status: 'pending' });
 
   commentsByPostId[req.params.id] = comments;
 
@@ -34,6 +35,7 @@ app.post('/posts/:id/comments', async (req, res) => {
       data: {
         id: commentId,
         content,
+        status: 'pending',
         postId: req.params.id,
       },
     })
