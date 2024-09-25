@@ -12,7 +12,10 @@ export interface Post {
 export interface Comment {
   id: string;
   content: string;
+  status: ModerationStatus;
 }
+
+export type ModerationStatus = 'pending' | 'approved' | 'rejected';
 
 const PostCard: React.FC<{ post: Post }> = ({ post }) => {
   return (

@@ -11,8 +11,10 @@ const POSTS_URL = 'http://localhost:4002/posts';
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 const App: React.FC = () => {
-  const { isLoading, data: posts } = useSWR<Post[]>(POSTS_URL, fetcher);
-  console.log({posts})
+  const { isLoading, data: posts } = useSWR<Post[]>(POSTS_URL, fetcher, {
+    refreshInterval: 3000,
+  });
+  
   return (
     <PageLayout>
       <PostCreate />
