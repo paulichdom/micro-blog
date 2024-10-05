@@ -31,9 +31,9 @@ app.post('/events', (req, res) => {
   console.log(JSON.stringify({ event }, null, 2));
 
   axios
-    .post('http://localhost:4000/events', event)
+    .post('http://posts-clusterip-srv:4000/events', event)
     .catch((error) => console.error(error));
-  axios
+  /* axios
     .post('http://localhost:4001/events', event)
     .catch((error) => console.error(error));
   axios
@@ -41,7 +41,7 @@ app.post('/events', (req, res) => {
     .catch((error) => console.error(error));
   axios
     .post('http://localhost:4003/events', event)
-    .catch((error) => console.error(error));
+    .catch((error) => console.error(error)); */
 
   res.send({ status: 'OK' });
 });
